@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TripMatch AI – Smart Travel Recommendations | Find Flights, Hotels & More</title>
+<meta name="description" content="TripMatch AI helps travelers find the best flights, hotels, transport, and activities worldwide. Get personalized travel recommendations powered by AI. Book with top platforms like Booking.com, Expedia, Klook & more.">
+<meta name="keywords" content="travel recommendations, book flights, cheap hotels, travel AI, Booking.com, Expedia, Klook, Omio, 12go Asia, eSIM travel, travel tips, trip planner">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="TripMatch AI – Smart Travel Recommendations">
+<meta property="og:description" content="Find the best flights, hotels, transport and activities with AI-powered travel recommendations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tripmatch.fikrago.com">
+<link rel="canonical" href="https://tripmatch.fikrago.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5efe6;
+    --cream: #fdfaf6;
+    --earth: #c4956a;
+    --deep: #1a2332;
+    --teal: #2d7d6f;
+    --coral: #e05a3a;
+    --muted: #7a8694;
+    --card: #ffffff;
+    --border: #e8ddd0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,250,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep); text-decoration: none; }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-cta {
+    background: var(--teal); color: white; border: none; padding: 0.5rem 1.2rem;
+    border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--coral); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--deep); border-radius: 2px; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a2332 0%, #2d4a3e 50%, #1a2332 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(196,149,106,0.2); border: 1px solid rgba(196,149,106,0.4);
+    color: var(--earth); padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+    margin-bottom: 1.5rem; text-transform: uppercase;
+    animation: fadeUp 0.6s ease both;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: white; line-height: 1.1; margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+  h1 em { color: var(--earth); font-style: italic; }
+  .hero-sub {
+    color: rgba(255,255,255,0.65); font-size: 1.1rem; max-width: 560px;
+    line-height: 1.7; margin-bottom: 3rem;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  /* ── AI TOOL ── */
+  .ai-box {
+    background: var(--card); border-radius: 20px; padding: 2rem;
+    width: 100%; max-width: 680px; box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+  .ai-box label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem; text-align: left; }
+  .ai-row { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+  .ai-row input, .ai-row select, .ai-box textarea {
+    flex: 1; padding: 0.8rem 1rem; border: 1.5px solid var(--border);
+    border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    color: var(--deep); background: var(--cream); outline: none;
+    transition: border-color 0.2s;
+  }
+  .ai-row input:focus, .ai-row select:focus, .ai-box textarea:focus { border-color: var(--teal); }
+  .ai-box textarea { width: 100%; resize: none; height: 80px; margin-bottom: 1rem; }
+  .btn-primary {
+    width: 100%; padding: 1rem; background: var(--teal); color: white;
+    border: none; border-radius: 12px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, transform 0.1s;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: #235f54; }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { background: #aaa; cursor: not-allowed; }
+
+  /* ── RESULTS ── */
+  #results { margin-top: 1.5rem; text-align: left; }
+  .result-section { margin-bottom: 1.5rem; }
+  .result-section h3 { font-size: 0.95rem; font-weight: 600; color: var(--deep); margin-bottom: 0.75rem; }
+  .rec-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .rec-card {
+    border: 1.5px solid var(--border); border-radius: 12px; padding: 1rem;
+    background: var(--cream); transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .rec-card:hover { border-color: var(--teal); transform: translateY(-2px); }
+  .rec-card .platform { font-size: 0.75rem; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .rec-card .rec-title { font-size: 0.9rem; font-weight: 600; color: var(--deep); margin-bottom: 0.25rem; }
+  .rec-card .rec-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+  .rec-card .rec-cta { display: inline-block; margin-top: 0.5rem; font-size: 0.78rem; font-weight: 600; color: var(--coral); }
+  .ai-summary {
+    background: linear-gradient(135deg, rgba(45,125,111,0.08), rgba(196,149,106,0.08));
+    border: 1px solid rgba(45,125,111,0.2); border-radius: 12px;
+    padding: 1rem 1.2rem; margin-bottom: 1rem;
+    font-size: 0.88rem; line-height: 1.7; color: var(--deep);
+  }
+  .ai-disclaimer { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 1rem; line-height: 1.5; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--earth); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--deep); line-height: 1.2; margin-bottom: 1rem; }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 560px; }
+
+  /* ── PARTNERS ── */
+  #partners { background: var(--sand); }
+  .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .partner-card {
+    background: var(--card); border-radius: 16px; padding: 1.5rem;
+    border: 1px solid var(--border); transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none; color: inherit; display: flex; flex-direction: column;
+  }
+  .partner-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-4px); }
+  .partner-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .partner-name { font-weight: 700; font-size: 1rem; color: var(--deep); margin-bottom: 0.25rem; }
+  .partner-cat { font-size: 0.75rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .partner-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .partner-link { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 1rem; font-size: 0.82rem; font-weight: 600; color: var(--coral); text-decoration: none; }
+
+  /* ── HOW IT WORKS ── */
+  #how { background: var(--cream); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .step { text-align: center; }
+  .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--teal); color: white; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+  .step h3 { font-weight: 700; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--deep); color: white; }
+  #about .section-title { color: white; }
+  #about .section-sub { color: rgba(255,255,255,0.6); max-width: 680px; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+  .about-list { list-style: none; margin-top: 1.5rem; }
+  .about-list li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+  .about-list li::before { content: '✓'; color: var(--earth); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+  .about-links { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-outline { padding: 0.7rem 1.5rem; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50px; color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: background 0.2s, border-color 0.2s; }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+  .btn-donate { padding: 0.7rem 1.5rem; background: var(--earth); border: none; border-radius: 50px; color: white; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: background 0.2s; }
+  .btn-donate:hover { background: #b07d50; }
+  .about-visual { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; }
+  .stat { margin-bottom: 1.5rem; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--earth); font-weight: 700; }
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 0.25rem; }
+
+  /* ── PRIVACY ── */
+  #privacy { background: var(--sand); }
+  .privacy-content { max-width: 760px; margin-top: 2rem; }
+  .privacy-content h3 { font-weight: 700; margin: 1.5rem 0 0.5rem; font-size: 1rem; }
+  .privacy-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.75rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep); color: rgba(255,255,255,0.5);
+    padding: 2.5rem 2rem; text-align: center; font-size: 0.83rem;
+  }
+  footer a { color: var(--earth); text-decoration: none; }
+  footer a:hover { color: white; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .footer-copy { margin-top: 1rem; font-size: 0.78rem; }
+
+  /* ── LOADER ── */
+  .loader { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .rec-cards { grid-template-columns: 1fr; }
+    .ai-row { flex-direction: column; }
+    .about-grid { grid-template-columns: 1fr; }
+    .partners-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .partners-grid { grid-template-columns: 1fr; }
+  }
+
+  .hidden { display: none !important; }
+  .fade-in { animation: fadeUp 0.5s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Trip<span>Match</span> AI</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+  </ul>
+  <a href="https://paypal.me/websiteMA" target="_blank" class="nav-cta">☕ Support Us</a>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO + AI TOOL -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">✈️ AI-Powered Travel Recommendations</div>
+  <h1>Find Your Perfect<br><em>Travel Deal</em> Instantly</h1>
+  <p class="hero-sub">Tell us where you're going — our AI matches you with the best platforms for flights, hotels, transport, activities, and SIM cards.</p>
+
+  <div class="ai-box">
+    <label>🌍 Where are you going?</label>
+    <div class="ai-row">
+      <input type="text" id="destination" placeholder="e.g. Tokyo, Paris, Bali..." />
+      <select id="tripType">
+        <option value="">Trip type...</option>
+        <option value="solo">Solo</option>
+        <option value="couple">Couple</option>
+        <option value="family">Family</option>
+        <option value="group">Group</option>
+        <option value="backpacker">Backpacker</option>
+      </select>
+    </div>
+    <div class="ai-row">
+      <input type="text" id="origin" placeholder="Flying from... (optional)" />
+      <select id="budget">
+        <option value="">Budget range...</option>
+        <option value="budget">Budget (under $500)</option>
+        <option value="mid">Mid-range ($500–$2000)</option>
+        <option value="premium">Premium ($2000+)</option>
+      </select>
+    </div>
+    <label>✏️ Any specific needs or interests?</label>
+    <textarea id="userNeeds" placeholder="e.g. need train pass, want local experiences, need SIM card, looking for cheap hotels..."></textarea>
+    <button class="btn-primary" id="getRecsBtn" onclick="getRecommendations()">
+      <span>🔍 Get My Travel Recommendations</span>
+    </button>
+    <div id="results" class="hidden"></div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="container">
+    <p class="section-label">Our Travel Partners</p>
+    <h2 class="section-title">Top Platforms,<br>Curated For You</h2>
+    <p class="section-sub">We partner with the world's leading travel booking platforms. Every recommendation links you directly to the best deals.</p>
+    <div class="partners-grid">
+      <a href="https://booking.tpm.lv/8li12Wgx" target="_blank" rel="noopener" class="partner-card">
+        <div class="partner-icon">🏨</div>
+        <div class="partner-name">Booking.com</div>
+        <div class="partner-cat">Hotels & Stays</div>
+        <p class="partner-desc">The world's largest accommodation platform with 28M+ listings — hotels, apartments, villas, and hostels.</p>
+        <span class="partner-link">Browse Hotels →</span>
+      </a>
+      <a href="https://expedia.tpm.lv/BHCj9eZg" target="_blank" rel="noopener" class="partner-card">
+        <div class="partner-icon">✈️</div>
+        <div class="partner-name">Expedia</div>
+        <div class="partner-cat">Flights & Packages</div>
+        <p class="partner-desc">Book flights, hotels, and vacation packages in one place. Unlock exclusive bundle discounts with Expedia.</p>
+        <span class="partner-link">Search Flights →</span>
+      </a>
+      <a href="https://omio.tpm.lv/rnZuYpHg" target="_blank" rel="noopener" class="partner-card">
+        <div class="partner-icon">🚆</div>
+        <div class="partner-name">Omio</div>
+        <div class="partner-cat">Trains & Buses</div>
+        <p class="partner-desc">Compare and book trains, buses, and ferries across Europe and beyond. Ground transport made simple.</p>
+        <span class="partner-link">Find Transport →</span>
+      </a>
+      <a href="https://12go.tpm.lv/2U4b2fki" target="_blank" rel="noopener" class="partner-card">
+        <div class="partner-icon">🛺</div>
+        <div class="partner-name">12Go Asia</div>
+        <div class="partner-cat">Asia Transport</div>
+        <p class="partner-desc">Specialist in Asia travel: trains, buses, ferries, and transfers across Thailand, Vietnam, Japan & more.</p>
+        <span class="partner-link">Book in Asia →</span>
+      </a>
+      <a href="https://klook.tpm.lv/cq6N8sSj" target="_blank" rel="noopener" class="partner-card">
+        <div class="partner-icon">🎭</div>
+        <div class="partner-name">Klook</div>
+        <div class="partner-cat">Activities & Experiences</div>
+        <p class="partner-desc">Book tours, attractions, day trips, and local experiences. Discover authentic things to do worldwide.</p>
+        <span class="partner-link">Explore Activities →</span>
+      </a>
+      <a href="https://tpm.lv/gnDsquaN" target="_blank" rel="noopener" class="partner-card">
+        <div class="partner-icon">🌐</div>
+        <div class="partner-name">Travel Extras</div>
+        <div class="partner-cat">Insurance & More</div>
+        <p class="partner-desc">Essential travel add-ons including travel insurance, airport transfers, and other trip necessities.</p>
+        <span class="partner-link">Explore Extras →</span>
+      </a>
+      <a href="https://airalo.tpm.lv/WszXG1qf" target="_blank" rel="noopener" class="partner-card">
+        <div class="partner-icon">📶</div>
+        <div class="partner-name">Airalo</div>
+        <div class="partner-cat">eSIM & Connectivity</div>
+        <p class="partner-desc">Stay connected abroad without expensive roaming. Get affordable eSIMs for 190+ countries instantly.</p>
+        <span class="partner-link">Get eSIM →</span>
+      </a>
+      <a href="https://www.fikrago.com/" target="_blank" rel="noopener" class="partner-card" style="border-color: var(--earth);">
+        <div class="partner-icon">📝</div>
+        <div class="partner-name">Fikrago Blog</div>
+        <div class="partner-cat">Travel Tips & Guides</div>
+        <p class="partner-desc">Read in-depth travel guides, money-saving tips, and digital tools reviewed by our team at Fikrago.</p>
+        <span class="partner-link">Read Blog →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <p class="section-label">Simple Process</p>
+    <h2 class="section-title">How TripMatch AI Works</h2>
+    <p class="section-sub">Get personalized travel platform recommendations in seconds — no signup required.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Tell Us Your Trip</h3>
+        <p>Enter your destination, travel style, and budget. Mention any specific needs like transport or connectivity.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>AI Analyzes & Matches</h3>
+        <p>Our AI evaluates your needs and matches them with the most relevant travel platforms and booking tools.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Review Recommendations</h3>
+        <p>See curated suggestions with explanations — understand exactly why each platform fits your journey.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Book & Go</h3>
+        <p>Click through to your chosen platform, book your trip, and travel confidently with the best tools.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label" style="color: var(--earth);">About TripMatch AI</p>
+    <div class="about-grid">
+      <div>
+        <h2 class="section-title">Built for Travelers,<br>By a Traveler</h2>
+        <p class="section-sub">TripMatch AI is a project by <a href="https://www.fikrago.com/" target="_blank" style="color: var(--earth);">Fikrago</a> — an independent digital publishing brand focused on practical tools for real people.</p>
+        <ul class="about-list">
+          <li>We recommend only vetted, trusted travel platforms with proven track records</li>
+          <li>Our AI gives honest recommendations — not just the highest-paying affiliate</li>
+          <li>We're fully transparent: this site earns commissions when you book via our links</li>
+          <li>All recommendations are generated by AI and may not always be perfect — use your judgment</li>
+          <li>We never collect personal data or require account creation</li>
+        </ul>
+        <div class="about-links">
+          <a href="https://www.fikrago.com/" target="_blank" class="btn-outline">🌐 Visit Fikrago</a>
+          <a href="https://paypal.me/websiteMA" target="_blank" class="btn-donate">☕ Support Us</a>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="stat"><div class="stat-num">7+</div><div class="stat-label">Trusted Travel Platforms</div></div>
+        <div class="stat"><div class="stat-num">190+</div><div class="stat-label">Countries Covered</div></div>
+        <div class="stat"><div class="stat-num">Free</div><div class="stat-label">No Account Required</div></div>
+        <div class="stat" style="margin-bottom:0"><div class="stat-num">AI</div><div class="stat-label">Powered Recommendations</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy">
+  <div class="container">
+    <p class="section-label">Legal</p>
+    <h2 class="section-title">Privacy Policy</h2>
+    <div class="privacy-content">
+      <p><strong>Last updated:</strong> March 2025 &nbsp;|&nbsp; <strong>Operated by:</strong> <a href="https://www.fikrago.com/" target="_blank">Fikrago</a></p>
+
+      <h3>1. Data We Collect</h3>
+      <p>TripMatch AI does not require account creation. When you use our AI tool, your typed input (destination, trip type, preferences) is sent to the AI API to generate recommendations. We do not store, log, or retain this data on our servers after your session ends.</p>
+
+      <h3>2. Affiliate Disclosure</h3>
+      <p>This website contains affiliate links. When you click a recommendation link and make a purchase or booking, we may earn a commission at no extra cost to you. This is how we fund the service and keep it free. We are participants in affiliate programs operated by Booking.com, Expedia, Omio, 12Go Asia, Klook, Airalo, and others.</p>
+
+      <h3>3. AI Disclaimer</h3>
+      <p>Recommendations on this site are generated by artificial intelligence. While we strive for accuracy and helpfulness, AI can make mistakes. Recommendations are not professional travel advice. Always verify pricing, availability, and suitability directly with the booking platform before purchasing.</p>
+
+      <h3>4. Cookies & Analytics</h3>
+      <p>We may use basic analytics tools (such as Google Analytics) to understand how visitors use our site. These tools may use cookies. We do not use cookies for advertising purposes. You can disable cookies in your browser settings at any time.</p>
+
+      <h3>5. Third-Party Links</h3>
+      <p>Our site links to third-party platforms (Booking.com, Expedia, etc.). We are not responsible for the privacy practices or content of these external sites. Please review their privacy policies separately.</p>
+
+      <h3>6. Your Rights</h3>
+      <p>Since we do not collect or store personal data, there is no profile to delete. If you have concerns, contact us via <a href="https://www.fikrago.com/" target="_blank">Fikrago</a>.</p>
+
+      <h3>7. Changes to This Policy</h3>
+      <p>We may update this privacy policy from time to time. The date at the top of this page reflects the most recent revision. Continued use of the site constitutes acceptance of any updated policy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#partners">Partners</a>
+    <a href="#how">How It Works</a>
+    <a href="#about">About</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="https://www.fikrago.com/" target="_blank">Fikrago Blog</a>
+    <a href="https://paypal.me/websiteMA" target="_blank">☕ Support</a>
+  </div>
+  <p>⚠️ <em>This site contains affiliate links. We earn commissions when you book via our links — at no extra cost to you. AI recommendations may not always be perfect; always verify before booking.</em></p>
+  <p class="footer-copy">© 2025 TripMatch AI by <a href="https://www.fikrago.com/" target="_blank">Fikrago</a>. Built with ❤️ for travelers worldwide.</p>
+</footer>
+
+<script>
+// ── AFFILIATE LINKS MAP ──
+const AFFILIATES = {
+  hotels: { name: 'Booking.com', url: 'https://booking.tpm.lv/8li12Wgx', icon: '🏨', desc: 'Best for finding and comparing hotels, hostels, apartments worldwide.' },
+  flights: { name: 'Expedia', url: 'https://expedia.tpm.lv/BHCj9eZg', icon: '✈️', desc: 'Book flights, packages, and vacation bundles with great savings.' },
+  euroTrain: { name: 'Omio', url: 'https://omio.tpm.lv/rnZuYpHg', icon: '🚆', desc: 'Compare trains, buses & ferries across Europe easily.' },
+  asiaTrain: { name: '12Go Asia', url: 'https://12go.tpm.lv/2U4b2fki', icon: '🛺', desc: 'Best for buses, trains, and transfers across Southeast & East Asia.' },
+  activities: { name: 'Klook', url: 'https://klook.tpm.lv/cq6N8sSj', icon: '🎭', desc: 'Book tours, attractions, and unique local experiences.' },
+  extras: { name: 'Travel Extras', url: 'https://tpm.lv/gnDsquaN', icon: '🌐', desc: 'Travel insurance, airport transfers, and essential trip add-ons.' },
+  esim: { name: 'Airalo eSIM', url: 'https://airalo.tpm.lv/WszXG1qf', icon: '📶', desc: 'Affordable eSIMs for 190+ countries — stay connected instantly.' },
+};
+
+const SYSTEM_PROMPT = `You are a travel recommendation assistant for TripMatch AI, a tool on the website https://www.fikrago.com/. 
+Your job: based on the user's destination, trip type, budget, origin, and specific needs — recommend which travel platforms they should use, and explain why clearly and helpfully.
+
+AVAILABLE PLATFORMS (only recommend from these):
+- hotels: Booking.com — hotels, stays, accommodations worldwide
+- flights: Expedia — flights, bundles, vacation packages  
+- euroTrain: Omio — trains/buses in Europe and beyond
+- asiaTrain: 12Go Asia — transport in Southeast/East Asia (Thailand, Vietnam, Japan, etc.)
+- activities: Klook — tours, attractions, experiences, things to do
+- extras: Travel Extras — insurance, airport transfers, extras
+- esim: Airalo — eSIM/data SIM cards for abroad
+
+INSTRUCTIONS:
+1. Write a short, friendly 2–3 sentence travel tip summary about their destination/trip (max 60 words).
+2. Return a JSON block like this at the end:
+{"recommended": ["hotels", "flights", "activities"], "reasons": {"hotels": "Short reason why", "flights": "Short reason why", "activities": "Short reason why"}}
+Only include platforms that are genuinely relevant. Always include "hotels" unless they mentioned staying with friends. Include "esim" if they mention connectivity or if it's an international trip. Include "asiaTrain" for Asia destinations, "euroTrain" for European destinations.
+Do NOT recommend platforms that don't fit their trip.`;
+
+async function getRecommendations() {
+  const dest = document.getElementById('destination').value.trim();
+  const tripType = document.getElementById('tripType').value;
+  const origin = document.getElementById('origin').value.trim();
+  const budget = document.getElementById('budget').value;
+  const needs = document.getElementById('userNeeds').value.trim();
+
+  if (!dest) { alert('Please enter your destination!'); return; }
+
+  const btn = document.getElementById('getRecsBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="loader"></div> Analyzing your trip...';
+
+  const userMsg = `Destination: ${dest}${origin ? '\nFlying from: ' + origin : ''}${tripType ? '\nTrip type: ' + tripType : ''}${budget ? '\nBudget: ' + budget : ''}${needs ? '\nSpecific needs: ' + needs : ''}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.map(b => b.text || '').join('');
+
+    // Parse summary (before JSON) and JSON block
+    const jsonMatch = text.match(/\{[\s\S]*"recommended"[\s\S]*\}/);
+    const summary = text.replace(/\{[\s\S]*\}/, '').trim();
+    let recs = null;
+
+    if (jsonMatch) {
+      try { recs = JSON.parse(jsonMatch[0]); } catch(e) {}
+    }
+
+    renderResults(summary, recs, dest);
+  } catch(e) {
+    // Fallback if API fails — show all platforms
+    renderResults(`Planning a trip to ${dest}? Here are our top recommended platforms to make your journey smooth and affordable. Compare options and book with confidence!`, null, dest);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<span>🔍 Get My Travel Recommendations</span>';
+}
+
+function renderResults(summary, recs, dest) {
+  const resultsEl = document.getElementById('results');
+  resultsEl.classList.remove('hidden');
+
+  let platforms = recs?.recommended || Object.keys(AFFILIATES);
+  let reasons = recs?.reasons || {};
+
+  let html = `<div class="ai-summary">✈️ <strong>For your trip to ${dest}:</strong> ${summary}</div>`;
+  html += `<div class="result-section"><h3>📌 Recommended Platforms for Your Trip</h3><div class="rec-cards">`;
+
+  platforms.forEach(key => {
+    const p = AFFILIATES[key];
+    if (!p) return;
+    const reason = reasons[key] || p.desc;
+    html += `<a href="${p.url}" target="_blank" rel="noopener" class="rec-card fade-in">
+      <div class="platform">${p.icon} ${p.name}</div>
+      <div class="rec-title">${getCardTitle(key)}</div>
+      <div class="rec-desc">${reason}</div>
+      <span class="rec-cta">Book Now →</span>
+    </a>`;
+  });
+
+  html += `</div></div>`;
+  html += `<p class="ai-disclaimer">⚠️ AI-powered recommendations — may not always be perfect. Verify details directly on each platform. This site earns commissions when you book via our links, at no extra cost to you. | <a href="https://www.fikrago.com/" target="_blank" style="color:var(--teal)">More travel tips on Fikrago</a></p>`;
+
+  resultsEl.innerHTML = html;
+  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function getCardTitle(key) {
+  const titles = {
+    hotels: 'Find Your Perfect Stay',
+    flights: 'Search & Book Flights',
+    euroTrain: 'Trains & Buses in Europe',
+    asiaTrain: 'Transport Across Asia',
+    activities: 'Tours & Experiences',
+    extras: 'Travel Insurance & Extras',
+    esim: 'Stay Connected Abroad'
+  };
+  return titles[key] || 'Book Now';
+}
+
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  links.style.flexDirection = 'column';
+  links.style.position = 'fixed';
+  links.style.top = '64px';
+  links.style.left = '0';
+  links.style.right = '0';
+  links.style.background = 'var(--cream)';
+  links.style.padding = '1.5rem 2rem';
+  links.style.borderBottom = '1px solid var(--border)';
+  links.style.zIndex = '99';
+}
+
+// Allow Enter key in inputs to trigger
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) {
+    getRecommendations();
+  }
+});
+</script>
+</body>
+</html>
